@@ -34,3 +34,7 @@ Route::resource('posts', 'PostController');
 Route::resource('kuuset', 'KuusiController');
 
 Route::resource('orders', 'OrderController');
+
+//Route::get('orders/create/{id}','OrderController')->name('order_id');
+
+//Route::get('/orders/{id}', 'OrderController@orderwithid');

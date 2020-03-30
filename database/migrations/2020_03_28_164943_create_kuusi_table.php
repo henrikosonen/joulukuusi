@@ -15,12 +15,7 @@ class CreateKuusiTable extends Migration
     {
         Schema::create('kuusi', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->char('firstname');
-            $table->char('lastname');
-            $table->char('address');
-            $table->char('city');
-            $table->char('postalcode');
-            $table->char('description',155);
+            $table->char('description');
             $table->float('price');
             $table->timestamps();
         });

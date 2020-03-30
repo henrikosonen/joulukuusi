@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Order;
+use App\Kuusi;
 
 class OrderController extends Controller
 {
@@ -14,7 +15,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view(orders.index);
+        return view('orders.index');
     }
 
     /**
@@ -25,6 +26,12 @@ class OrderController extends Controller
     public function create()
     {
         return view('orders.create');
+    }
+
+    public function orderwithid($id){
+        dd($id);
+        return view('orders.orderwithid');
+        //return '<h1>Hello world</h1>';
     }
 
     /**
@@ -43,15 +50,21 @@ class OrderController extends Controller
             'postalcode' => 'required',          
         ]);
 
-        //create post
+        //create order
         $order = new Order;
         $order->firstname = $request->input('firstname');
         $order->lastname = $request->input('lastname');
         $order->address = $request->input('address');
+        $order->email = $request->input('email');
+        $order->phonenumber = $request->input('phonenumber');
         $order->postalcode = $request->input('postalcode');
         $order->city = $request->input('city');
         $order->description = $request->input('description');
+        $order->kuusi_id = $request->input('kuusi_id');
+        $order->price =$request->input('price');
+        
         $order->save();
+
 
         return redirect('/');
     }
@@ -64,7 +77,10 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        //Haetaan kannasta Kuusi id:llä
+        //return 'tämä oli: '.$id;
+        $kuusi = Kuusi::find($id);
+        return view('orders.orderwithid')->with('kuusi', $kuusi);
     }
 
     /**
